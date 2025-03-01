@@ -58,21 +58,20 @@ app.post("/wishes", async (req, res) => {
     }
 });
 
-// API xóa lời chúc
+// API xoá  lời chúc
 app.delete("/wishes/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const deletedWish = await Wish.findByIdAndDelete(id);
-
         if (!deletedWish) {
             return res.status(404).json({ error: "Lời chúc không tồn tại" });
         }
-
         res.json({ message: "Lời chúc đã được xóa", wish: deletedWish });
     } catch (error) {
         res.status(500).json({ error: "Lỗi server" });
     }
-});
+});    
+
 
 // Chạy server
 app.listen(PORT, () => {
